@@ -1,7 +1,0 @@
-Metadata-Version: 2.4
-Name: ui-e2e-playwright-pytest
-Version: 0.1.0
-Requires-Python: >=3.11
-Requires-Dist: pytest>=8.0.0
-Requires-Dist: playwright>=1.42.0
-Requires-Dist: pytest-playwright>=0.4.4
