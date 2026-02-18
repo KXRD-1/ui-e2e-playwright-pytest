@@ -16,7 +16,8 @@ def _safe(name: str) -> str:
 def context(playwright: Playwright, request):
     os.makedirs(ARTIFACTS_DIR, exist_ok=True)
 
-    browser = playwright.chromium.launch(headless=True)
+    headless = os.getenv("HEADLESS", "true").lower() == "true"
+    browser = playwright.chromium.launch(headless=headless)
     ctx = browser.new_context(
         base_url=BASE_URL,
         record_video_dir=os.path.join(ARTIFACTS_DIR, "video"),

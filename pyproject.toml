@@ -6,6 +6,7 @@ dependencies = [
   "pytest>=8.0.0",
   "playwright>=1.42.0",
   "pytest-playwright>=0.4.4",
+  "pytest-html>=4.1.1",
 ]
 
 [tool.pytest.ini_options]

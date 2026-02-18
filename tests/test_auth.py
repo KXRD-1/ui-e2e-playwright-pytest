@@ -4,18 +4,19 @@ from ui_e2e.pages.inventory_page import InventoryPage
 
 
 @pytest.mark.smoke
-def test_login_valid(page):
+@pytest.mark.parametrize(
+    "username,password,should_pass",
+    [
+        ("standard_user", "secret_sauce", True),
+        ("standard_user", "wrong_pass", False),
+    ],
+)
+def test_login(page, username, password, should_pass):
     login = LoginPage(page)
     login.open("/")
-    login.login("standard_user", "secret_sauce")
+    login.login(username, password)
 
-    inv = InventoryPage(page)
-    inv.should_be_opened()
-
-
-@pytest.mark.smoke
-def test_login_invalid(page):
-    login = LoginPage(page)
-    login.open("/")
-    login.login("standard_user", "wrong_pass")
-    login.should_show_error("Username and password do not match")
+    if should_pass:
+        InventoryPage(page).should_be_opened()
+    else:
+        login.should_show_error("Username and password do not match")
