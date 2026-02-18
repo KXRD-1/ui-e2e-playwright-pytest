@@ -4,6 +4,7 @@ from .base_page import BasePage
 
 class CartPage(BasePage):
     ITEM = ".cart_item"
+    CHECKOUT_BTN = '[data-test="checkout"]'
 
     def __init__(self, page: Page):
         super().__init__(page)
@@ -17,3 +18,6 @@ class CartPage(BasePage):
 
     def should_not_have_item(self, item_name: str):
         expect(self.page.locator(self.ITEM).filter(has_text=item_name)).to_have_count(0)
+
+    def checkout(self):
+        self.page.click(self.CHECKOUT_BTN)
